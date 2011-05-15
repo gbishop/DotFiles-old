@@ -10,3 +10,20 @@ Categories=PackageManager;GTK;System;Settings;
 MimeType=application/x-deb;application/x-debian-package;x-scheme-handler/apt;
 StartupNotify=true
 X-Ubuntu-Gettext-Domain=software-center
+X-Ayatana-Desktop-Shortcuts=Synaptic;SoftwareProperties;SoftwareSources;
+ 
+[SoftwareProperties Shortcut Group]
+Name=Update Manager
+Exec=update-manager -c %u
+TargetEnvironment=Unity
+ 
+[SoftwareSources Shortcut Group]
+Name=Add/Edit PPAs
+Exec=gksu software-properties-gtk
+TargetEnvironment=Unity
+
+[Synaptic Shortcut Group]
+Name=Synaptic
+Exec=gksu synaptic
+TargetEnvironment=Unity
+

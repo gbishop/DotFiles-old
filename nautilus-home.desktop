@@ -8,8 +8,28 @@ Terminal=false
 StartupNotify=true
 Type=Application
 Categories=GNOME;GTK;Core;
-OnlyShowIn=GNOME;
+OnlyShowIn=GNOME;Unity;
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=nautilus
 X-GNOME-Bugzilla-Component=general
 X-Ubuntu-Gettext-Domain=nautilus
+X-Ayatana-Desktop-Shortcuts=Projects;Hacks;Documents;Dropbox
+[Projects Shortcut Group]
+Name=Projects
+Exec=nautilus Projects
+TargetEnvironment=Unity
+ 
+[Documents Shortcut Group]
+Name=Documents
+Exec=nautilus Documents
+TargetEnvironment=Unity
+ 
+[Hacks Shortcut Group]
+Name=Hacks
+Exec=nautilus Hacks
+TargetEnvironment=Unity
+ 
+[Dropbox Shortcut Group]
+Name=Dropbox
+Exec=nautilus Dropbox
+TargetEnvironment=Unity

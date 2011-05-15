@@ -12,5 +12,26 @@ X-GNOME-Bugzilla-Component=BugBuddyBugs
 X-GNOME-Bugzilla-Version=2.32.1
 Categories=GNOME;GTK;Utility;TerminalEmulator;
 StartupNotify=true
-OnlyShowIn=GNOME;
+OnlyShowIn=GNOME;Unity;
 X-Ubuntu-Gettext-Domain=gnome-terminal
+X-Ayatana-Desktop-Shortcuts=Top;Root;
+
+[NewWindow Shortcut Group]
+Name=New Window
+Exec=gnome-terminal --window
+TargetEnvironment=Unity
+
+[NewTab Shortcut Group]
+Name=New Tab
+Exec=gnome-terminal --tab
+TargetEnvironment=Unity
+
+[Root Shortcut Group]
+Name=Root Terminal
+Exec=gksudo gnome-terminal
+TargetEnvironment=Unity
+
+[Top Shortcut Group]
+Name=Top
+Exec=gnome-terminal --command top
+TargetEnvironment=Unity
