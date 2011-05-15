@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+'''Select, Add, and Commit in one'''
+
+import os
+import sys
+import re
+import subprocess
+import time
+
+#sys.stdout = sys.stderr = open('/tmp/Archive.log', 'w')
+
+import PyZenity as zenity
+
+def GitStatus(dirname):
+    p = subprocess.Popen(["git", "status", "-s"], stdout=subprocess.PIPE, cwd=dirname)
+    output = p.communicate()[0]
+    if p.returncode != 0:
+        print "not git dir"
+        return []
+    result = [ (line[0:2]==' M', line[3:]) for line in output.split('\n') if line ]
+    return result
+
+def ExcludeFile(fname):
+    '''Test files for exclusion'''
+    # do not include folders by default
+    if os.path.isdir(fname):
+        return True
+    # do not include hidden files
+    if fname.startswith('.') and not fname.startswith('../'):
+        return True
+    # do not include backup files
+    if fname.endswith('~'):
+        return True
+    # do not include common generated files
+    name, ext = os.path.splitext(fname)
+    if ext in [ '.pyc', '.pyo', '.o' ]:
+        return True
+    return False
+
+def IncludeFile(fname):
+    '''Test files for default inclusion in the archive'''
+    # do not include files of size 0 or those that are too big
+    if not (0 < os.path.getsize(fname) < MaxSize):
+        return False
+    return True
+
+#if len(sys.argv) == 1:
+#    # clicked on empty space in the folder
+#    files = [ (IncludeFile(fname),fname) for fname in os.listdir('.') if not ExcludeFile(fname) ]
+#else:
+#    # some files selected
+#    files = [ (True, fname) for fname in sys.argv[1:] ]
+
+files = GitStatus('.')
+
+if not files:
+    print 'nothing to do'
+    sys.exit(1)
+
+# use zenity to ask for confirmation of the list
+res = zenity.List(['', 'file'],
+                  title='Choose files to include',
+                  boolstyle='checklist',
+                  data=files,
+                  width=300,
+                  height=400)
+if not res:
+    print 'nothing selected'
+    sys.exit(1)
+
+subprocess.Popen(['git', 'add'] + res)
+msg = zenity.GetText(text="Commit message", width=400)
+subprocess.Popen(['git', 'commit', '-m', msg])
+
+
+

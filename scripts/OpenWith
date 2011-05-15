@@ -1,0 +1,41 @@
+#!/usr/bin/python
+
+import sys
+import os
+import os.path as osp
+import webbrowser
+
+LINKDIR = '/home/gb/public_html/tmp'
+LINKURL = 'http://localhost/local/tmp'
+
+sys.stdout = sys.stderr = file('/tmp/log.txt', 'w')
+
+if osp.basename(sys.argv[0]) == 'local.dev':
+    LINKURL = LINKURL.replace("localhost", "local.dev")
+
+print sys.argv
+
+target = sys.argv[1]
+
+if not target.startswith('/'):
+    target = osp.abspath(target)
+
+if osp.isdir(target):
+    link = osp.join(LINKDIR, osp.basename(target))
+    url = osp.join(LINKURL, osp.basename(target))
+    if osp.lexists(link):
+        os.remove(link)
+    os.symlink(target, link)
+    webbrowser.open(url)
+elif osp.isfile(target):
+    fname = osp.basename(target)
+    dname = osp.dirname(target)
+    link = osp.join(LINKDIR, osp.basename(dname))
+    print 'link', link
+    url = osp.join(LINKURL, osp.basename(dname), fname)
+    if osp.lexists(link):
+        os.remove(link)
+    os.symlink(dname, link)
+    webbrowser.open(url)
+else:
+    print 'neither'
