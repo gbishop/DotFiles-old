@@ -1,3 +1,5 @@
 [user]
 	name = Gary Bishop
 	email = gary.bishop.unc@gmail.com
+[core]
+        excludesfile = ~/.gitignore
