@@ -57,6 +57,9 @@ newLink('scripts/OpenTerminalHere', osp.join(ns, 'Open Terminal Here'))
 newLink('scripts/OpenWith', osp.join(ns, 'localhost'))
 newLink('scripts/OpenWith', osp.join(ns, 'local.dev'))
 
+# Crontab
+sp.check_call(['crontab', 'crontab'])
+
 
 
 
