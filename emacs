@@ -8,22 +8,41 @@
  '(current-language-environment "UTF-8")
  '(default-input-method "rfc1345")
  '(global-font-lock-mode t nil (font-lock))
+ '(inhibit-startup-screen t)
  '(mouse-wheel-mode t nil (mwheel))
  '(pc-selection-mode t nil (pc-select))
  '(scroll-bar-mode nil)
  '(show-paren-mode t nil (paren))
  '(tool-bar-mode nil nil (tool-bar)))
 
-  ;; (progn       
-  ;;   (setq default-frame-alist 
-  ;;         '((top . 0) (left . 1400) 
-  ;;           (width . 100) (height . 64)
-  ;;           ))
-  ;;   (setq initial-frame-alist '((top . 10) (left . 370) (width . 100) (height . 65)))
-  ;;   )
+;; current buffer name in title bar
+(setq frame-title-format "%b - emacs")
+
+(defun set-frame-size-according-to-resolution ()
+  (interactive)
+  (if window-system
+      (progn
+        (if (= (x-display-pixel-width) 2800)
+            (add-to-list 'default-frame-alist (cons 'left 1400))
+          (add-to-list 'default-frame-alist (cons 'left 100)))
+        (add-to-list 'default-frame-alist (cons 'top 0))
+        ;; for the height, subtract a couple hundred pixels
+        ;; from the screen height (for panels, menubars and
+        ;; whatnot), then divide by the height of a char to
+        ;; get the height we want
+        (add-to-list 'default-frame-alist 
+                     (cons 'height (/ (- (x-display-pixel-height) 180)
+                                      (frame-char-height))))
+        (add-to-list 'default-frame-alist
+                     (cons 'width 100))
+)))
+
+(set-frame-size-according-to-resolution)
+
 
 ;; add my emacs folder
-(setq load-path (cons "~/misc/emacs" load-path))
+;; (setq load-path (cons "~/misc/emacs" load-path))
+(setq load-path (cons "~/.emacs.d" load-path))
 
 ; configure python
 (setq-default indent-tabs-mode nil) ; changes tabs into spaces.
@@ -153,7 +172,7 @@ Otherwise, analyses point position and answers."
   (save-some-buffers t))
 
 ; Start the server for emacsclient
-(server-start)
+; (server-start)
 
 ; fix clipboard behavior
 (setq x-select-enable-clipboard t)
@@ -167,7 +186,7 @@ Otherwise, analyses point position and answers."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 121 :width normal :foundry "unknown" :family "Liberation Mono")))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
 
 ; key bindings more like the rest of the world (including CUA turned on above)
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
@@ -181,3 +200,6 @@ Otherwise, analyses point position and answers."
 (global-set-key "\C-z" 'undo)
 (global-set-key (kbd "<tab>") 'smart-tab)
 (global-set-key (kbd "<esc>") 'keyboard-quit)
+
+(require 'color-theme-solarized)
+(color-theme-solarized-light)
