@@ -1,0 +1,405 @@
+{
+    "folders": [
+        {
+            "folders": [], 
+            "usageCount": 59, 
+            "modes": [], 
+            "abbreviation": {
+                "ignoreCase": false, 
+                "wordChars": "[\\w]", 
+                "immediate": false, 
+                "abbreviation": null, 
+                "backspace": true, 
+                "triggerInside": false
+            }, 
+            "title": "Sample Scripts", 
+            "hotkey": {
+                "hotKey": null, 
+                "modifiers": []
+            }, 
+            "items": [
+                {
+                    "usageCount": 32, 
+                    "omitTrigger": false, 
+                    "code": "# Enter script code\nimport time\nwindow.activate('chrome')\nif window.wait_for_focus('.*Chrome'):\n    #time.sleep(0.1)\n    keyboard.send_keys(\"<alt>+1\")\n    #time.sleep(0.1)\n    keyboard.send_keys('gi')\n", 
+                    "prompt": false, 
+                    "description": "Gmail", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": "m", 
+                        "modifiers": [
+                            "<alt>"
+                        ]
+                    }, 
+                    "modes": [
+                        3
+                    ], 
+                    "showInTrayMenu": true, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }, 
+                {
+                    "usageCount": 27, 
+                    "omitTrigger": false, 
+                    "code": "# log me out on ctrl-alt-delete\n\nsystem.exec_command('gnome-session-save --logout-dialog')", 
+                    "prompt": false, 
+                    "description": "Logout", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": "<delete>", 
+                        "modifiers": [
+                            "<alt>", 
+                            "<ctrl>"
+                        ]
+                    }, 
+                    "modes": [
+                        3
+                    ], 
+                    "showInTrayMenu": false, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }, 
+                {
+                    "usageCount": 0, 
+                    "omitTrigger": false, 
+                    "code": "output = system.exec_command(\"date\")\nkeyboard.send_keys(output)", 
+                    "prompt": false, 
+                    "description": "Insert Date", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "modes": [], 
+                    "showInTrayMenu": false, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }, 
+                {
+                    "usageCount": 0, 
+                    "omitTrigger": false, 
+                    "code": "choices = [\"something\", \"something else\", \"a third thing\"]\n\nretCode, choice = dialog.list_menu(choices)\nif retCode == 0:\n    keyboard.send_keys(\"You chose \" + choice)", 
+                    "prompt": false, 
+                    "description": "List Menu", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "modes": [], 
+                    "showInTrayMenu": false, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }, 
+                {
+                    "usageCount": 0, 
+                    "omitTrigger": false, 
+                    "code": "text = clipboard.get_selection()\nkeyboard.send_key(\"<delete>\")\nkeyboard.send_keys(\"The text %s was here previously\" % text)", 
+                    "prompt": false, 
+                    "description": "Selection Test", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "modes": [], 
+                    "showInTrayMenu": false, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }, 
+                {
+                    "usageCount": 0, 
+                    "omitTrigger": false, 
+                    "code": "import time\ntime.sleep(0.25)\ncontents = clipboard.get_selection()\nretCode, abbr = dialog.input_dialog(\"New Abbreviation\", \"Choose an abbreviation for the new phrase\")\nif retCode == 0:\n    if len(contents) > 20:\n        title = contents[0:17] + \"...\"\n    else:\n        title = contents\n    folder = engine.get_folder(\"My Phrases\")\n    engine.create_abbreviation(folder, title, abbr, contents)", 
+                    "prompt": false, 
+                    "description": "Abbreviation from selection", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "modes": [], 
+                    "showInTrayMenu": false, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }, 
+                {
+                    "usageCount": 0, 
+                    "omitTrigger": false, 
+                    "code": "import time\ntime.sleep(0.25)\ncontents = clipboard.get_selection()\nif len(contents) > 20:\n    title = contents[0:17] + \"...\"\nelse:\n    title = contents\nfolder = engine.get_folder(\"My Phrases\")\nengine.create_phrase(folder, title, contents)", 
+                    "prompt": false, 
+                    "description": "Phrase from selection", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "modes": [], 
+                    "showInTrayMenu": false, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }, 
+                {
+                    "usageCount": 0, 
+                    "omitTrigger": false, 
+                    "code": "# Enter script code", 
+                    "prompt": false, 
+                    "description": "Blog Post", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "modes": [], 
+                    "showInTrayMenu": false, 
+                    "filter": null, 
+                    "type": "script", 
+                    "store": {}
+                }
+            ], 
+            "filter": null, 
+            "type": "folder", 
+            "showInTrayMenu": true
+        }, 
+        {
+            "folders": [
+                {
+                    "folders": [], 
+                    "usageCount": 0, 
+                    "modes": [], 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": false, 
+                        "abbreviation": null, 
+                        "backspace": true, 
+                        "triggerInside": false
+                    }, 
+                    "title": "Addresses", 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "items": [
+                        {
+                            "usageCount": 0, 
+                            "omitTrigger": false, 
+                            "prompt": false, 
+                            "description": "Home Address", 
+                            "abbreviation": {
+                                "ignoreCase": false, 
+                                "wordChars": "[\\w]", 
+                                "immediate": false, 
+                                "abbreviation": "adr", 
+                                "backspace": true, 
+                                "triggerInside": false
+                            }, 
+                            "hotkey": {
+                                "hotKey": null, 
+                                "modifiers": []
+                            }, 
+                            "phrase": "22 Avenue Street\nBrisbane\nQLD\n4000", 
+                            "modes": [
+                                1
+                            ], 
+                            "showInTrayMenu": false, 
+                            "matchCase": false, 
+                            "filter": null, 
+                            "type": "phrase", 
+                            "sendMode": "kb"
+                        }
+                    ], 
+                    "filter": null, 
+                    "type": "folder", 
+                    "showInTrayMenu": false
+                }
+            ], 
+            "usageCount": 21, 
+            "modes": [
+                3
+            ], 
+            "abbreviation": {
+                "ignoreCase": false, 
+                "wordChars": "[\\w]", 
+                "immediate": false, 
+                "abbreviation": null, 
+                "backspace": true, 
+                "triggerInside": false
+            }, 
+            "title": "My Phrases", 
+            "hotkey": {
+                "hotKey": "<f7>", 
+                "modifiers": [
+                    "<ctrl>"
+                ]
+            }, 
+            "items": [
+                {
+                    "usageCount": 17, 
+                    "omitTrigger": false, 
+                    "prompt": false, 
+                    "description": "Tar Heel Reader", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": true, 
+                        "abbreviation": "thrc.", 
+                        "backspace": true, 
+                        "triggerInside": true
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "phrase": "Hi,\n\nThank you for your interest in Tar Heel Reader. You can register yourself using the Register link on the lower right of the Welcome page. In order to register you will need to know the secret registration code. The secret is \"Literacy!\" without the quotation marks. Remember to use capital L and include the exclamation point. Feel free to tell the secret to others but please don't post it somewhere that bad spammers will find it.\n\nIf you are planning to have your students write, it is best to get one account for yourself and have your students use it. Multiple users can use the same id at the same time.\n\nGo forth and make books!\ngb\n", 
+                    "modes": [
+                        1
+                    ], 
+                    "showInTrayMenu": true, 
+                    "matchCase": false, 
+                    "filter": ".*Gmail.*Google Chrome", 
+                    "type": "phrase", 
+                    "sendMode": "<ctrl>+v"
+                }, 
+                {
+                    "usageCount": 2, 
+                    "omitTrigger": false, 
+                    "prompt": false, 
+                    "description": "Check Calendar", 
+                    "abbreviation": {
+                        "ignoreCase": false, 
+                        "wordChars": "[\\w]", 
+                        "immediate": true, 
+                        "abbreviation": "cmc.", 
+                        "backspace": true, 
+                        "triggerInside": true
+                    }, 
+                    "hotkey": {
+                        "hotKey": null, 
+                        "modifiers": []
+                    }, 
+                    "phrase": "Check my calendar at http://www.cs.unc.edu/~gb/calendar.html\u00a0and propose an open looking time that works for you.\n\ngb", 
+                    "modes": [
+                        1
+                    ], 
+                    "showInTrayMenu": true, 
+                    "matchCase": false, 
+                    "filter": ".*Gmail.*Google Chrome", 
+                    "type": "phrase", 
+                    "sendMode": "<ctrl>+v"
+                }
+            ], 
+            "filter": null, 
+            "type": "folder", 
+            "showInTrayMenu": true
+        }
+    ], 
+    "toggleServiceHotkey": {
+        "hotKey": "k", 
+        "modifiers": [
+            "<shift>", 
+            "<super>"
+        ], 
+        "enabled": true
+    }, 
+    "settings": {
+        "showTrayIcon": true, 
+        "windowDefaultSize": [
+            1390, 
+            876
+        ], 
+        "undoUsingBackspace": true, 
+        "enableQT4Workaround": false, 
+        "promptToSave": true, 
+        "interfaceType": "XRecord", 
+        "showToolbar": true, 
+        "serviceRunning": true, 
+        "columnWidths": [
+            150, 
+            50, 
+            100
+        ], 
+        "isFirstRun": false, 
+        "sortByUsageCount": true, 
+        "notificationIcon": "/usr/share/pixmaps/akicon.png", 
+        "hPanePosition": 347, 
+        "menuTakesFocus": false
+    }, 
+    "userCodeDir": "/home/gb", 
+    "version": "0.71.2", 
+    "showPopupHotkey": {
+        "hotKey": null, 
+        "modifiers": [], 
+        "enabled": false
+    }, 
+    "configHotkey": {
+        "hotKey": "k", 
+        "modifiers": [
+            "<super>"
+        ], 
+        "enabled": true
+    }
+}
