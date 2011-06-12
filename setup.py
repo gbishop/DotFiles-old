@@ -9,6 +9,8 @@ inHome = 'bashrc emacs gitconfig gitignore profile'.split()
 inApps = [ 'gnome-terminal.desktop',
            'nautilus-home.desktop',
            'ubuntu-software-center.desktop',
+           'logout.desktop',
+           'mymacs.desktop'
            ]
 
 home = os.getenv('HOME')
@@ -17,7 +19,9 @@ def newLink(s, d):
     s = osp.abspath(s)
     if not d.startswith('/'):
         d = osp.join(os.getenv('HOME'), d)
-    if osp.exists(d):
+    if osp.lexists(d):
+        if osp.exists(d) and osp.samefile(d, s):
+            return
         os.remove(d)
     dir = osp.dirname(d)
     if not osp.exists(dir):
@@ -34,6 +38,11 @@ apps = osp.join('.local', 'share', 'applications')
 for fname in inApps:
     d = osp.join(apps, fname)
     newLink(fname, d)
+
+# emacs
+for fname in os.listdir('emacs.d'):
+    newLink(osp.join('emacs.d', fname), osp.join('.emacs.d', fname))
+newLink('mymacs.py', osp.join('bin', 'mymacs'))
 
 def GitIt(repo, url):
     if not osp.exists(repo):
@@ -59,6 +68,10 @@ newLink('scripts/OpenWith', osp.join(ns, 'local.dev'))
 
 # Crontab
 sp.check_call(['crontab', 'crontab'])
+
+# Autokey
+newLink('autokey.json', osp.join('.config/autokey/autokey.json'))
+
 
 
 
