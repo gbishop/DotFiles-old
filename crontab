@@ -1,3 +1,5 @@
-# clean up links created by my OpenWith script
-0 0-23 * * * find public_html/tmp/ -type l -mtime +1 -exec rm "{}" \;
+MAILTO=gary.bishop.unc@gmail.com
 
+# clean up links created by my OpenWith script
+0 * * * * find public_html/tmp/ -type l -mtime +1 -exec rm "{}" \;
+45 * * * * python /home/gb/Hacks/Post/postgr.py
